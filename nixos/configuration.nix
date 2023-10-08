@@ -67,6 +67,9 @@
   boot.initrd.luks.devices."luks-bc0b5124-bf9c-44d1-b416-c04788852387".keyFile = "/crypto_keyfile.bin";
 
   networking.hostName = "nixos"; # Define your hostname.
+
+
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -75,6 +78,12 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+
+
+
+
+
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
@@ -94,12 +103,15 @@
     LC_TIME = "en_IN";
   };
 
+  services.flatpak.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
 
   # Configure keymap in X11
   services.xserver = {
@@ -134,7 +146,8 @@
   users.users.vaisakh = {
     isNormalUser = true;
     description = "vaisakh";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input"];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
       kate
@@ -151,7 +164,30 @@
     vim
     wget
     git
+    tailscale
+    at
+    libsForQt5.kdeconnect-kde
   ];
+
+
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  programs.kdeconnect.enable = true;
+  programs.zsh.enable = true;
+
+  programs.dconf.enable = true;
+
+
+  services.tailscale.enable = true;
+  services.atd.enable = true;
+
+  security.pam.services.swaylock = {
+      text = ''
+          auth include login
+          '';
+  };
+
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -166,6 +202,14 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  services.openssh= {
+      enable = true;
+      settings = {
+          PasswordAuthentication = true;
+      };
+# I'll disable this once I can connect.
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
