@@ -80,6 +80,9 @@
 
         appimage-run
 
+#nix 
+        nix-direnv
+
 #gui apps
         teams
         libreoffice
@@ -94,13 +97,13 @@
         networkmanagerapplet
         waybar
         rofi-wayland
-        
+        slurp
+
         libnotify
         dunst
         swww
         brightnessctl
         wlogout
-        swaylock
 
 #theme
 #        dconf
@@ -110,6 +113,7 @@
 
 #temp
         logisim-evolution
+        paperless-ngx
 
         ];
 
@@ -170,10 +174,10 @@
         enable = true;
         extraPackages = with pkgs; [
             nodejs
-            python311Packages.pip
-            gcc
+                python311Packages.pip
+                gcc
 
-            ripgrep
+                ripgrep
         ];
     };
 

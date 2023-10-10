@@ -109,8 +109,18 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
+
+  services.greetd = {
+      enable = true;
+      settings = {
+          default_session = {
+              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
+              user = "greeter";
+          };
+      };
+  };
 
 
   # Configure keymap in X11
@@ -169,6 +179,7 @@
     libsForQt5.kdeconnect-kde
   ];
 
+  environment.noXlibs = false;
 
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
