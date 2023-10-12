@@ -80,9 +80,6 @@
 
         appimage-run
 
-#nix 
-        nix-direnv
-
 #gui apps
         teams
         libreoffice
@@ -91,6 +88,7 @@
         easyeffects
         brave
         obs-studio
+        gimp
         (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
 #hyperland config
@@ -179,6 +177,15 @@
 
                 ripgrep
         ];
+    };
+    programs = {
+        direnv = {
+            enable = true;
+            #enableZshIntegration = true; # see note on other shells below
+                nix-direnv.enable = true;
+        };
+
+        #zsh.enable = true; # see note on other shells below
     };
 
 # Nicely reload system units when changing configs
