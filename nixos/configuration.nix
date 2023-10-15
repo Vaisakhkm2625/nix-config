@@ -107,7 +107,7 @@
   services.flatpak.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
@@ -177,6 +177,8 @@
     git
     tailscale
     at
+    xfce.thunar
+    xfce.thunar-volman
     libsForQt5.kdeconnect-kde
   ];
 
@@ -191,8 +193,22 @@
   programs.dconf.enable = true;
 
 
+  programs.thunar.plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+          thunar-volman
+  ];
+
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+
+      services.tumbler.enable = true; # Thumbnail support for images
+
+
+
   services.tailscale.enable = true;
+
   services.atd.enable = true;
+
+
 
   security.pam.services.swaylock = {
       text = ''
