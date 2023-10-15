@@ -23,6 +23,11 @@ nix shell nixpkgs#home-manager
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 ```
 
+### devenv
+```
+nix profile install --accept-flake-config tarball+https://install.devenv.sh/latest
+
+```
 ### easy effects presets
 
 - https://github.com/JackHack96/EasyEffects-Presets

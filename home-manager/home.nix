@@ -77,8 +77,10 @@
         grim
         jrnl # journl software(for my diaries)
 
+        poppler_utils
 
         appimage-run
+        steam-run
 
 #gui apps
         teams
@@ -89,6 +91,10 @@
         brave
         obs-studio
         gimp
+        zathura
+        thunderbird
+
+
         (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
 #hyperland config
@@ -143,6 +149,7 @@
 
 
 
+
     gtk.iconTheme.package = pkgs.papirus-icon-theme;
     gtk.iconTheme.name = "Papirus-Dark";
 
@@ -178,6 +185,15 @@
                 ripgrep
         ];
     };
+
+
+    #services.gvfs.enable = true; # Mount, trash, and other functionalities
+
+    #services.tumbler.enable = true; # Thumbnail support for images
+
+
+
+
     programs = {
         direnv = {
             enable = true;
@@ -193,4 +209,6 @@
 
 # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     home.stateVersion = "23.05";
+
+
                                     }
