@@ -81,6 +81,10 @@
   networking.networkmanager.enable = true;
 
 
+#virtualbox
+      virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+
 
 
 
@@ -105,6 +109,12 @@
   };
 
   services.flatpak.enable = true;
+
+#  services.xremap = {
+#    withHypr = true;
+#    userName = "vaisakh";
+#
+#    };
 
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
@@ -137,6 +147,7 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;

@@ -108,11 +108,32 @@
         swww
         brightnessctl
         wlogout
+        protonvpn-gui
+        pywal
 
 #theme
 #        dconf
         materia-kde-theme
         libsForQt5.qtstyleplugin-kvantum
+
+
+# LSPs
+        # typstfmt
+        # typst-lsp
+        # typst-live
+        cmake-language-server
+        python311Packages.python-lsp-ruff
+        python311Packages.python-lsp-server
+        python311Packages.pylsp-rope
+        lua-language-server
+        # ruff-lsp
+        clang-tools_16
+        nodePackages_latest.bash-language-server
+        # nodePackages_latest.vscode-langservers-extracted
+        # nodePackages_latest.typescript-language-server
+        # nodePackages_latest."@tailwindcss/language-server"
+        # typescript
+        # quick-lint-js
 
 
 #temp
@@ -181,6 +202,8 @@
             nodejs
                 python311Packages.pip
                 gcc
+                clang-tools_9
+                
 
                 ripgrep
         ];
