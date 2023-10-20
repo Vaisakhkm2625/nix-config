@@ -58,6 +58,33 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.initrd.systemd.enable = true;
+
+# https://www.reddit.com/r/NixOS/comments/16ibzb4/nixos_polish_powerline_plymouth_boot_animation_etc/
+
+#boot.plymouth.theme = "bgrt";
+
+#-
+boot.initrd.verbose = false;
+
+#-
+boot.consoleLogLevel = 0;
+
+#-
+boot.kernelParams = [ "quiet" "udev.log_level=0" ];
+
+#https://github.com/NixOS/nixpkgs/pull/215693
+boot.plymouth = {
+    enable = true;
+    #theme = "rings";
+    theme = "circuit";
+
+
+    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["circuit"];})];
+  };
+
+
+
   # Setup keyfile
   boot.initrd.secrets = {
     "/crypto_keyfile.bin" = null;
@@ -82,8 +109,8 @@
 
 
 #virtualbox
-      virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+      #virtualisation.virtualbox.host.enable = true;
+   #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
 
 
@@ -148,6 +175,13 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+
+#xremap
+  hardware.uinput.enable = true;
+  users.groups.uinput.members = ["vaisakh"];
+  users.groups.input.members = ["vaisakh"];
+
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -193,6 +227,10 @@
     libsForQt5.kdeconnect-kde
   ];
 
+
+
+
+
   environment.noXlibs = false;
 
   programs.hyprland.enable = true;
@@ -214,6 +252,28 @@
       services.tumbler.enable = true; # Thumbnail support for images
 
 
+security.polkit.enable = true;
+
+#xdg.portal.extraportals = [
+#    pkgs.xdg-desktop-portal-gtk
+#];
+#
+#systemd = {
+#    user.services.polkit-gnome-authentication-agent-1 = {
+#        description = "polkit-gnome-authentication-agent-1";
+#        wantedby = [ "graphical-session.target" ];
+#        wants = [ "graphical-session.target" ];
+#        after = [ "graphical-session.target" ];
+#        serviceconfig = {
+#            type = "simple";
+#            execstart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+#            restart = "on-failure";
+#            restartsec = 1;
+#            timeoutstopsec = 10;
+#        };
+#    };
+#};
+#
 
   services.tailscale.enable = true;
 
@@ -249,6 +309,11 @@
       };
 # I'll disable this once I can connect.
   };
+
+#networking
+networking.nameservers = [
+    "1.1.1.1"
+];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -6,6 +6,7 @@
     imports = [
 # If you want to use home-manager modules from other flakes (such as nix-colors):
 # inputs.nix-colors.homeManagerModule
+inputs.xremap-flake.homeManagerModules.default
 
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
@@ -75,7 +76,9 @@
         bc
         pipx
         grim
-        jrnl # journl software(for my diaries)
+        #jrnl # journl software(for my diaries)
+        wtype
+        rofimoji #emoji seletor
 
         poppler_utils
 
@@ -110,6 +113,8 @@
         wlogout
         protonvpn-gui
         pywal
+
+        inputs.xremap-flake.packages.${system}.default
 
 #theme
 #        dconf
@@ -214,6 +219,19 @@
 
     #services.tumbler.enable = true; # Thumbnail support for images
 
+
+#xremap
+
+services.xremap = {
+    withHypr = true;
+yamlConfig = ''
+keymap:
+  - remap:
+      CapsLock-i: Up
+''
+;
+
+    };
 
 
 
