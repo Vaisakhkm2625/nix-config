@@ -6,7 +6,7 @@
     imports = [
 # If you want to use home-manager modules from other flakes (such as nix-colors):
 # inputs.nix-colors.homeManagerModule
-inputs.xremap-flake.homeManagerModules.default
+        inputs.xremap-flake.homeManagerModules.default
 
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
@@ -17,6 +17,7 @@ inputs.xremap-flake.homeManagerModules.default
         overlays = [
 # If you want to use overlays exported from other flakes:
 # neovim-nightly-overlay.overlays.default
+
 
 # Or define it inline, for example:
 # (final: prev: {
@@ -76,9 +77,11 @@ inputs.xremap-flake.homeManagerModules.default
         bc
         pipx
         grim
-        #jrnl # journl software(for my diaries)
+#jrnl # journl software(for my diaries)
         wtype
         rofimoji #emoji seletor
+
+        swaynotificationcenter
 
         poppler_utils
 
@@ -96,13 +99,16 @@ inputs.xremap-flake.homeManagerModules.default
         gimp
         zathura
         thunderbird
+        shotwell
+        qbittorrent
+        vlc
 
-
+        jellyfin
         (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
 #hyperland config
         networkmanagerapplet
-        waybar
+#waybar
         rofi-wayland
         slurp
 
@@ -120,30 +126,37 @@ inputs.xremap-flake.homeManagerModules.default
 #        dconf
         materia-kde-theme
         libsForQt5.qtstyleplugin-kvantum
+        wpgtk # don't know needed... setting gtk from pywal
 
 
+############ development ##################
 # LSPs
-        # typstfmt
-        # typst-lsp
-        # typst-live
+# typstfmt
+# typst-lsp
+# typst-live
         cmake-language-server
         python311Packages.python-lsp-ruff
         python311Packages.python-lsp-server
         python311Packages.pylsp-rope
         lua-language-server
-        # ruff-lsp
+# ruff-lsp
         clang-tools_16
         nodePackages_latest.bash-language-server
-        # nodePackages_latest.vscode-langservers-extracted
-        # nodePackages_latest.typescript-language-server
-        # nodePackages_latest."@tailwindcss/language-server"
-        # typescript
-        # quick-lint-js
+# nodePackages_latest.vscode-langservers-extracted
+# nodePackages_latest.typescript-language-server
+# nodePackages_latest."@tailwindcss/language-server"
+# typescript
+# quick-lint-js
+
+
+# global installs
+
+        nodePackages_latest.live-server
 
 
 #temp
-        logisim-evolution
-        paperless-ngx
+        #logisim-evolution
+        #paperless-ngx
 
         ];
 
@@ -165,8 +178,8 @@ inputs.xremap-flake.homeManagerModules.default
     gtk.cursorTheme.name = "Bibata-Modern-Ice";
 
 
-# gtk.theme.package = pkgs.adw-gtk3;
-# gtk.theme.name = "adw-gtk3";
+gtk.theme.package = pkgs.adw-gtk3;
+gtk.theme.name = "adw-gtk3";
 
 
 # qt.enable = true;
@@ -179,8 +192,8 @@ inputs.xremap-flake.homeManagerModules.default
     gtk.iconTheme.package = pkgs.papirus-icon-theme;
     gtk.iconTheme.name = "Papirus-Dark";
 
-    gtk.theme.package = pkgs.materia-theme;
-    gtk.theme.name = "Materia-dark-compact";
+    #gtk.theme.package = pkgs.materia-theme;
+    #gtk.theme.name = "Materia-dark-compact";
 
     xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
         [General]
@@ -196,11 +209,15 @@ inputs.xremap-flake.homeManagerModules.default
 
 # Enable home-manager and git
     programs.home-manager.enable = true;
+
     programs.git = {
         enable = true;
         userName  = "Vaisakh K M";
         userEmail = "vaisakhkm2625@gmail.com";
     };
+
+
+
     programs.neovim = {
         enable = true;
         extraPackages = with pkgs; [
@@ -208,41 +225,45 @@ inputs.xremap-flake.homeManagerModules.default
                 python311Packages.pip
                 gcc
                 clang-tools_9
-                
+
 
                 ripgrep
         ];
     };
 
+    programs.waybar = {
+        enable = true;
+        package = pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true"] ;} );
+    };
 
-    #services.gvfs.enable = true; # Mount, trash, and other functionalities
+#services.gvfs.enable = true; # Mount, trash, and other functionalities
 
-    #services.tumbler.enable = true; # Thumbnail support for images
+#services.tumbler.enable = true; # Thumbnail support for images
 
 
 #xremap
 
-services.xremap = {
-    withHypr = true;
-yamlConfig = ''
-keymap:
-  - remap:
-      CapsLock-i: Up
-''
-;
+  services.xremap = {
+      withHypr = true;
+      yamlConfig = ''
+          keymap:
+          - remap:
+          CapsLock-i: Up
+          ''
+          ;
 
-    };
+  };
 
 
 
     programs = {
         direnv = {
             enable = true;
-            #enableZshIntegration = true; # see note on other shells below
-                nix-direnv.enable = true;
+#enableZshIntegration = true; # see note on other shells below
+            nix-direnv.enable = true;
         };
 
-        #zsh.enable = true; # see note on other shells below
+#zsh.enable = true; # see note on other shells below
     };
 
 # Nicely reload system units when changing configs

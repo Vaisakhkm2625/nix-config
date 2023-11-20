@@ -109,12 +109,14 @@ boot.plymouth = {
 
 
 #virtualbox
-      #virtualisation.virtualbox.host.enable = true;
+#virtualisation.virtualbox.host.enable = true;
    #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
 
-
-
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.x11 = true;
 
 
   # Set your time zone.
@@ -143,12 +145,22 @@ boot.plymouth = {
 #
 #    };
 
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  ## Enable the X11 windowing system.
+  services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  ## Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
+
+
+#
+#
+ 
+
+  services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.displayManager.startx.enable = true;
+    services.xserver.libinput.enable = true;
 
   services.greetd = {
       enable = true;
@@ -221,10 +233,12 @@ boot.plymouth = {
     wget
     git
     tailscale
+    swaylock
     at
     xfce.thunar
     xfce.thunar-volman
     libsForQt5.kdeconnect-kde
+    polkit_gnome
   ];
 
 
@@ -254,6 +268,9 @@ boot.plymouth = {
 
 security.polkit.enable = true;
 
+
+services.gnome.gnome-keyring.enable = true;
+
 #xdg.portal.extraportals = [
 #    pkgs.xdg-desktop-portal-gtk
 #];
@@ -273,7 +290,29 @@ security.polkit.enable = true;
 #        };
 #    };
 #};
-#
+
+systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+};
+
+  #services.gnome3.gnome-keyring.enable = true;
+  #security.pam.services.lightdm.enableGnomeKeyring = true;
+  #ssh.startAgent = true;
+  programs.seahorse.enable = true;
+
+#legacyPackages.x86_64-linux.polkit_gnome
 
   services.tailscale.enable = true;
 
@@ -313,13 +352,14 @@ security.polkit.enable = true;
 #networking
 networking.nameservers = [
     "1.1.1.1"
+    "8.8.8.8"
 ];
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 8080 8096 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

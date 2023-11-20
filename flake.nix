@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -12,6 +13,7 @@
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
     xremap-flake.url = "github:xremap/nix-flake";
+    pyprland-flake.url = "github:hyprland-community/pyprland";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
