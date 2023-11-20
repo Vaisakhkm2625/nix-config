@@ -20,7 +20,7 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, home-manager,nixpkgs-unstable, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -28,7 +28,25 @@
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
-        modules = [ ./nixos/configuration.nix ];
+
+        modules = [
+
+# https://www.reddit.com/r/NixOS/comments/klbuu2/unstable_packages_in_configurationnix_using_flakes/
+        ({ config, pkgs, ... }: 
+         let
+            overlay-unstable = final: prev: {
+            unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
+            };
+         in
+         {
+            nixpkgs.overlays = [ overlay-unstable ]; 
+            environment.systemPackages = with pkgs; [
+                unstable.libsForQt5.sddm
+                unstable.pyprland
+            ];
+         }
+        )
+        ./nixos/configuration.nix ];
       };
     };
 
