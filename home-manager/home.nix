@@ -18,6 +18,12 @@
 # If you want to use overlays exported from other flakes:
 # neovim-nightly-overlay.overlays.default
 
+ (self: super: {
+      mpv = super.mpv.override {
+        scripts = [ self.mpvScripts.mpris ];
+      };
+    })
+
 
 # Or define it inline, for example:
 # (final: prev: {
@@ -61,7 +67,7 @@
         ripdrag
         zoxide
         starship
-        exa
+        eza
         wl-clipboard
         playerctl
         poppler_utils #pdfunite, other pdf utils
@@ -89,7 +95,7 @@
         steam-run
 
 #gui apps
-        teams
+        #teams
         libreoffice
         gh
         kitty
@@ -101,9 +107,15 @@
         thunderbird
         shotwell
         qbittorrent
+        losslesscut-bin
         vlc
+        blender
+        qtcreator
 
         jellyfin
+        mpvpaper
+        yt-dlp
+        cava
         (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
 #hyperland config
@@ -142,6 +154,10 @@
 # ruff-lsp
         clang-tools_16
         nodePackages_latest.bash-language-server
+
+
+        poetry
+
 # nodePackages_latest.vscode-langservers-extracted
 # nodePackages_latest.typescript-language-server
 # nodePackages_latest."@tailwindcss/language-server"
@@ -231,10 +247,10 @@ gtk.theme.name = "adw-gtk3";
         ];
     };
 
-    programs.waybar = {
-        enable = true;
-        package = pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true"] ;} );
-    };
+    #programs.waybar = {
+    #    enable = true;
+    #    package = pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true"] ;} );
+    #};
 
 #services.gvfs.enable = true; # Mount, trash, and other functionalities
 

@@ -120,6 +120,7 @@ boot.plymouth = {
   virtualisation.virtualbox.guest.x11 = true;
 
 
+
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
@@ -150,7 +151,7 @@ boot.plymouth = {
   services.xserver.enable = true;
 
   ## Enable the KDE Plasma Desktop Environment.
-  #services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
 
 
@@ -163,16 +164,16 @@ boot.plymouth = {
   services.xserver.displayManager.startx.enable = true;
     services.xserver.libinput.enable = true;
 
-  services.greetd = {
-      enable = true;
-      settings = {
-          default_session = {
-              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
-              user = "greeter";
-          };
-      };
-  };
-
+#  services.greetd = {
+#      enable = true;
+#      settings = {
+#          default_session = {
+#              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
+#              user = "greeter";
+#          };
+#      };
+#  };
+#
 
   # Configure keymap in X11
   services.xserver = {
@@ -193,6 +194,15 @@ boot.plymouth = {
   hardware.uinput.enable = true;
   users.groups.uinput.members = ["vaisakh"];
   users.groups.input.members = ["vaisakh"];
+
+
+#bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
+
+
+
 
 
   services.pipewire = {
@@ -240,6 +250,7 @@ boot.plymouth = {
     xfce.thunar-volman
     libsForQt5.kdeconnect-kde
     polkit_gnome
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
 
