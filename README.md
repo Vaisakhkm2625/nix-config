@@ -46,3 +46,4 @@ added user in input group
 sudo chgrp uinput /dev/uinput
 sudo chmod g+rwx /dev/uinput
 ```
+# work_notes
