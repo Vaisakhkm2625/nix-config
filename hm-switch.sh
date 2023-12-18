@@ -1,2 +1,4 @@
-export NIXPKGS_ALLOW_INSECURE=1
-home-manager switch --flake .#vaisakh@nixos --impure
+#export NIXPKGS_ALLOW_INSECURE=1
+export NIXPKGS_ALLOW_BROKEN=1
+
+home-manager switch -b backup --flake .#vaisakh@nixos --impure

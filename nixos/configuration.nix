@@ -115,9 +115,22 @@ boot.plymouth = {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
-
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.virtualbox.guest.x11 = true;
+
+
+#podman
+ virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
 
 
@@ -251,6 +264,10 @@ boot.plymouth = {
     libsForQt5.kdeconnect-kde
     polkit_gnome
     libsForQt5.qt5.qtgraphicaleffects
+
+    wpgtk
+
+
   ];
 
 
@@ -266,6 +283,7 @@ boot.plymouth = {
   programs.zsh.enable = true;
 
   programs.dconf.enable = true;
+
 
 
   programs.thunar.plugins = with pkgs.xfce; [

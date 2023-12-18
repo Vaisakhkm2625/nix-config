@@ -137,8 +137,8 @@
 #theme
 #        dconf
         materia-kde-theme
-        libsForQt5.qtstyleplugin-kvantum
-        wpgtk # don't know needed... setting gtk from pywal
+        #libsForQt5.qtstyleplugin-kvantum
+        #wpgtk # don't know needed... setting gtk from pywal
 
 
 ############ development ##################
@@ -157,7 +157,6 @@
 
 
         poetry
-
 # nodePackages_latest.vscode-langservers-extracted
 # nodePackages_latest.typescript-language-server
 # nodePackages_latest."@tailwindcss/language-server"
@@ -188,14 +187,14 @@
 
 #---themeing
 
-    gtk.enable = true;
+    # gtk.enable = true;
 
-    gtk.cursorTheme.package = pkgs.bibata-cursors;
-    gtk.cursorTheme.name = "Bibata-Modern-Ice";
+    # gtk.cursorTheme.package = pkgs.bibata-cursors;
+    # gtk.cursorTheme.name = "Bibata-Modern-Ice";
 
 
-gtk.theme.package = pkgs.adw-gtk3;
-gtk.theme.name = "adw-gtk3";
+# gtk.theme.package = pkgs.adw-gtk3;
+# gtk.theme.name = "adw-gtk3";
 
 
 # qt.enable = true;
@@ -211,10 +210,10 @@ gtk.theme.name = "adw-gtk3";
     #gtk.theme.package = pkgs.materia-theme;
     #gtk.theme.name = "Materia-dark-compact";
 
-    xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-        [General]
-        theme=MateriaDark
-            '';
+    #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    #    [General]
+    #    theme=MateriaDark
+    #        '';
 
     home.sessionVariables = {
         QT_STYLE_OVERRIDE = "kvantum";
@@ -236,12 +235,15 @@ gtk.theme.name = "adw-gtk3";
 
     programs.neovim = {
         enable = true;
+        #extraConfig = ":luafile ~/.config/nvim/init.lua";
+        extraLuaPackages = ps: [ps.magick];
         extraPackages = with pkgs; [
             nodejs
                 python311Packages.pip
                 gcc
                 clang-tools_9
-
+                lua51Packages.luarocks
+                lua51Packages.magick
 
                 ripgrep
         ];
