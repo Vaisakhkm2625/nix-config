@@ -75,16 +75,15 @@ boot.consoleLogLevel = 0;
 boot.kernelParams = [ "quiet" "udev.log_level=0" ];
 
 #https://github.com/NixOS/nixpkgs/pull/215693
-boot.plymouth = {
-    enable = true;
-    #theme = "rings";
-    theme = "circuit";
-
-
-    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["circuit"];})];
-  };
-
-
+#boot.plymouth = {
+#    enable = true;
+#    #theme = "rings";
+#    theme = "circuit";
+#
+#    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["circuit"];})];
+#  };
+#
+environment.variables.GTK_USE_PORTAL = "1";
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -115,8 +114,14 @@ boot.plymouth = {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.x11 = true;
+  #virtualisation.virtualbox.guest.enable = true;
+  #virtualisation.virtualbox.guest.x11 = true;
+
+# enable v4l2loopback 
+boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+boot.kernelModules = [
+  "v4l2loopback"
+];
 
 
 #podman
@@ -168,9 +173,6 @@ boot.plymouth = {
   #services.xserver.desktopManager.plasma5.enable = true;
 
 
-#
-#
- 
 
   services.xserver.windowManager.qtile.enable = true;
   services.xserver.windowManager.i3.enable = true;
@@ -215,9 +217,6 @@ boot.plymouth = {
   services.blueman.enable = true;
 
 
-
-
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -257,7 +256,7 @@ boot.plymouth = {
     wget
     git
     tailscale
-    swaylock
+    swaylock-effects
     at
     xfce.thunar
     xfce.thunar-volman
@@ -272,9 +271,6 @@ boot.plymouth = {
   ];
 
 
-
-
-
   environment.noXlibs = false;
 
   programs.hyprland.enable = true;
@@ -284,8 +280,6 @@ boot.plymouth = {
   programs.zsh.enable = true;
 
   programs.dconf.enable = true;
-
-
 
   programs.thunar.plugins = with pkgs.xfce; [
       thunar-archive-plugin
@@ -353,6 +347,7 @@ systemd = {
   services.locate.enable = true;
   services.locate.locate = pkgs.mlocate;
 
+
   security.pam.services.swaylock = {
       text = ''
           auth include login
@@ -384,8 +379,8 @@ systemd = {
 
 #networking
 networking.nameservers = [
-    "1.1.1.1"
     "8.8.8.8"
+    "1.1.1.1"
 ];
 
   # Open ports in the firewall.

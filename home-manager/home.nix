@@ -1,7 +1,15 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, ... }:
+
+let
+  unstablePkgs = import inputs.nixpkgs-unstable {
+    inherit inputs;
+  };
+
+in
+{
 # You can import other home-manager modules here
     imports = [
 # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -64,6 +72,7 @@
         zip
         unzip
         ranger
+        yazi
         ripdrag
         zoxide
         starship
@@ -73,6 +82,7 @@
         poppler_utils #pdfunite, other pdf utils
         stow
         ydotool
+        #mlocate
         fd
         mpv
         xdotool
@@ -80,11 +90,22 @@
         lazygit
         jq
         bc
+        libqalculate
         pipx
         grim
 #jrnl # journl software(for my diaries)
         wtype
         rofimoji #emoji seletor
+        pavucontrol
+
+        swayidle
+
+        qrencode
+        timg
+
+        drawio
+
+        
 
         swaynotificationcenter
 
@@ -108,6 +129,7 @@
         qbittorrent
         losslesscut-bin
         vlc
+        imv
         blender
         qtcreator
 
@@ -132,6 +154,7 @@
         pywal
 
         inputs.xremap-flake.packages.${system}.default
+
 
 #theme
 #        dconf
@@ -167,12 +190,16 @@
 
         nodePackages_latest.live-server
 
+     #   unstablePkgs.neovim
 
 #temp
         #logisim-evolution
         #paperless-ngx
+        waypipe
+        xpra
 
         ];
+
 
 
 #    dconf = {
@@ -230,20 +257,41 @@
         userEmail = "vaisakhkm2625@gmail.com";
     };
 
+    #programs.rofi=  {
+    #    enable = true;
+    #    plugins = [
+    #        pkgs.rofi-calc
+    #    ];
+
+    #};
 
 
     programs.neovim = {
         enable = true;
+# TODO: 2023-12-18
+        #package = unstablePkgs.neovim; 
         #extraConfig = ":luafile ~/.config/nvim/init.lua";
         extraLuaPackages = ps: [ps.magick];
+        plugins = [
+            pkgs.vimPlugins.flutter-tools-nvim
+        ];
+
         extraPackages = with pkgs; [
-            nodejs
+            #nodejs
                 python311Packages.pip
                 gcc
                 clang-tools_9
                 lua51Packages.luarocks
                 lua51Packages.magick
 
+                cmake-language-server
+                java-language-server
+                gopls
+                #vimPlugins.markdown-preview-nvim
+
+                go
+                nodejs_18
+                yarn
                 ripgrep
         ];
     };

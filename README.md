@@ -47,3 +47,11 @@ sudo chgrp uinput /dev/uinput
 sudo chmod g+rwx /dev/uinput
 ```
 # work_notes
+
+
+# notes
+how to get unstable packages in a shell
+```
+nix-shell -I nixpkgs=channel:nixpkgs-unstable -p cosmic-term
+
+```
