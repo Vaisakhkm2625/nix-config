@@ -73,7 +73,6 @@
         poppler_utils #pdfunite, other pdf utils
         stow
         ydotool
-        mlocate
         fd
         mpv
         xdotool

@@ -265,6 +265,7 @@ boot.plymouth = {
     polkit_gnome
     libsForQt5.qt5.qtgraphicaleffects
 
+    #mlocate
     wpgtk
 
 
@@ -349,6 +350,8 @@ systemd = {
   services.atd.enable = true;
 
 
+  services.locate.enable = true;
+  services.locate.locate = pkgs.mlocate;
 
   security.pam.services.swaylock = {
       text = ''
