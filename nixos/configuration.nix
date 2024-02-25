@@ -296,9 +296,10 @@ security.polkit.enable = true;
 
 services.gnome.gnome-keyring.enable = true;
 
-#xdg.portal.extraportals = [
-#    pkgs.xdg-desktop-portal-gtk
-#];
+xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-gtk
+];
 #
 #systemd = {
 #    user.services.polkit-gnome-authentication-agent-1 = {

@@ -15,6 +15,8 @@
     xremap-flake.url = "github:xremap/nix-flake";
     pyprland-flake.url = "github:hyprland-community/pyprland";
 
+    #yazi-flake.url = "github:sxyazi/yazi/";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";

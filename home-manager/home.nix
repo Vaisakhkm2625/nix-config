@@ -15,7 +15,7 @@ in
 # If you want to use home-manager modules from other flakes (such as nix-colors):
 # inputs.nix-colors.homeManagerModule
         inputs.xremap-flake.homeManagerModules.default
-
+#            inputs.yazi-flake
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
     ];
@@ -66,8 +66,8 @@ in
 # cli terminal apps 
         tmux
         fzf
+        tuxmux
         ncdu
-        htop
         btop
         zip
         unzip
@@ -78,10 +78,13 @@ in
         starship
         eza
         wl-clipboard
+        cliphist
         playerctl
         poppler_utils #pdfunite, other pdf utils
         stow
+        findutils
         ydotool
+        foot
         #mlocate
         fd
         mpv
@@ -97,6 +100,11 @@ in
         wtype
         rofimoji #emoji seletor
         pavucontrol
+        nix-search-cli
+        pet
+        eclipses.eclipse-java
+
+man-pages # c development man pages
 
         swayidle
 
@@ -105,7 +113,7 @@ in
 
         drawio
 
-        
+        sway-audio-idle-inhibit       
 
         swaynotificationcenter
 
@@ -154,7 +162,7 @@ in
         pywal
 
         inputs.xremap-flake.packages.${system}.default
-
+        #inputs.yazi-flake.packages.${system}.default
 
 #theme
 #        dconf
@@ -177,6 +185,8 @@ in
         clang-tools_16
         nodePackages_latest.bash-language-server
 
+
+        #java-language-server
 
         poetry
 # nodePackages_latest.vscode-langservers-extracted
@@ -265,7 +275,10 @@ in
 
     #};
 
-
+    programs.htop= {
+        enable= true;
+        settings.show_cpu_temperature = 1;
+    };
     programs.neovim = {
         enable = true;
 # TODO: 2023-12-18
@@ -277,6 +290,8 @@ in
         ];
 
         extraPackages = with pkgs; [
+
+        # along with language-server, please add language packages also
             #nodejs
                 python311Packages.pip
                 gcc
@@ -285,9 +300,14 @@ in
                 lua51Packages.magick
 
                 cmake-language-server
-                java-language-server
                 gopls
                 #vimPlugins.markdown-preview-nvim
+
+                jdk
+                java-language-server
+
+                typstfmt
+                typst-lsp
 
                 go
                 nodejs_18
