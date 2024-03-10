@@ -22,34 +22,41 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager,nixpkgs-unstable, ... }@inputs: {
+  outputs = {
+    nixpkgs,
+    home-manager,
+    nixpkgs-unstable,
+    ...
+  } @ inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       # FIXME replace with your hostname (done)
       nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        specialArgs = {inherit inputs;}; # Pass flake inputs to our config
         # > Our main nixos configuration file <
 
         modules = [
-
-# https://www.reddit.com/r/NixOS/comments/klbuu2/unstable_packages_in_configurationnix_using_flakes/
-        ({ config, pkgs, ... }: 
-         let
-            overlay-unstable = final: prev: {
-            unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
-            };
-         in
-         {
-            nixpkgs.overlays = [ overlay-unstable ]; 
-            environment.systemPackages = with pkgs; [
+          # https://www.reddit.com/r/NixOS/comments/klbuu2/unstable_packages_in_configurationnix_using_flakes/
+          (
+            {
+              config,
+              pkgs,
+              ...
+            }: let
+              overlay-unstable = final: prev: {
+                unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
+              };
+            in {
+              nixpkgs.overlays = [overlay-unstable];
+              environment.systemPackages = with pkgs; [
                 unstable.libsForQt5.sddm
                 unstable.pyprland
                 unstable.waybar
-            ];
-         }
-        )
-        ./nixos/configuration.nix 
+              ];
+            }
+          )
+          ./nixos/configuration.nix
         ];
       };
     };
@@ -60,11 +67,11 @@
       # FIXME replace with your username@hostname (done)
       "vaisakh@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { 
-            inherit inputs;
-            }; # Pass flake inputs to our config
+        extraSpecialArgs = {
+          inherit inputs;
+        }; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
-        modules = [ ./home-manager/home.nix ];
+        modules = [./home-manager/home.nix];
       };
     };
   };

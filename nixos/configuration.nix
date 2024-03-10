@@ -1,7 +1,12 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ inputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules from other flakes (such as nixos-hardware):
@@ -9,8 +14,6 @@
     # inputs.hardware.nixosModules.common-ssd
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-
-
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -40,7 +43,7 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
@@ -61,29 +64,29 @@
 
   boot.initrd.systemd.enable = true;
 
-# https://www.reddit.com/r/NixOS/comments/16ibzb4/nixos_polish_powerline_plymouth_boot_animation_etc/
+  # https://www.reddit.com/r/NixOS/comments/16ibzb4/nixos_polish_powerline_plymouth_boot_animation_etc/
 
-#boot.plymouth.theme = "bgrt";
+  #boot.plymouth.theme = "bgrt";
 
-#-
-boot.initrd.verbose = false;
+  #-
+  boot.initrd.verbose = false;
 
-#-
-boot.consoleLogLevel = 0;
+  #-
+  boot.consoleLogLevel = 0;
 
-#-
-boot.kernelParams = [ "quiet" "udev.log_level=0" ];
+  #-
+  boot.kernelParams = ["quiet" "udev.log_level=0"];
 
-#https://github.com/NixOS/nixpkgs/pull/215693
-#boot.plymouth = {
-#    enable = true;
-#    #theme = "rings";
-#    theme = "circuit";
-#
-#    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["circuit"];})];
-#  };
-#
-environment.variables.GTK_USE_PORTAL = "1";
+  #https://github.com/NixOS/nixpkgs/pull/215693
+  #boot.plymouth = {
+  #    enable = true;
+  #    #theme = "rings";
+  #    theme = "circuit";
+  #
+  #    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["circuit"];})];
+  #  };
+  #
+  environment.variables.GTK_USE_PORTAL = "1";
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -96,8 +99,6 @@ environment.variables.GTK_USE_PORTAL = "1";
 
   networking.hostName = "nixos"; # Define your hostname.
 
-
-
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -107,25 +108,23 @@ environment.variables.GTK_USE_PORTAL = "1";
   # Enable networking
   networking.networkmanager.enable = true;
 
-
-#virtualbox
-#virtualisation.virtualbox.host.enable = true;
-   #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  #virtualbox
+  #virtualisation.virtualbox.host.enable = true;
+  #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
 
   #virtualisation.virtualbox.guest.enable = true;
   #virtualisation.virtualbox.guest.x11 = true;
 
-# enable v4l2loopback 
-boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-boot.kernelModules = [
-  "v4l2loopback"
-];
+  # enable v4l2loopback
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.kernelModules = [
+    "v4l2loopback"
+  ];
 
-
-#podman
- virtualisation = {
+  #podman
+  virtualisation = {
     podman = {
       enable = true;
 
@@ -136,8 +135,6 @@ boot.kernelModules = [
       defaultNetwork.settings.dns_enabled = true;
     };
   };
-
-
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
@@ -159,11 +156,11 @@ boot.kernelModules = [
 
   services.flatpak.enable = true;
 
-#  services.xremap = {
-#    withHypr = true;
-#    userName = "vaisakh";
-#
-#    };
+  #  services.xremap = {
+  #    withHypr = true;
+  #    userName = "vaisakh";
+  #
+  #    };
 
   ## Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -172,23 +169,21 @@ boot.kernelModules = [
   services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
 
-
-
   services.xserver.windowManager.qtile.enable = true;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.displayManager.startx.enable = true;
-    services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
-#  services.greetd = {
-#      enable = true;
-#      settings = {
-#          default_session = {
-#              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
-#              user = "greeter";
-#          };
-#      };
-#  };
-#
+  #  services.greetd = {
+  #      enable = true;
+  #      settings = {
+  #          default_session = {
+  #              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd Hyprland";
+  #              user = "greeter";
+  #          };
+  #      };
+  #  };
+  #
 
   # Configure keymap in X11
   services.xserver = {
@@ -204,18 +199,15 @@ boot.kernelModules = [
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-
-#xremap
+  #xremap
   hardware.uinput.enable = true;
   users.groups.uinput.members = ["vaisakh"];
   users.groups.input.members = ["vaisakh"];
 
-
-#bluetooth
+  #bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
-
 
   services.pipewire = {
     enable = true;
@@ -237,12 +229,12 @@ boot.kernelModules = [
   users.users.vaisakh = {
     isNormalUser = true;
     description = "vaisakh";
-    extraGroups = [ "networkmanager" "wheel" "input"];
+    extraGroups = ["networkmanager" "wheel" "input"];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
       kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -266,10 +258,7 @@ boot.kernelModules = [
 
     #mlocate
     wpgtk
-
-
   ];
-
 
   environment.noXlibs = false;
 
@@ -282,80 +271,74 @@ boot.kernelModules = [
   programs.dconf.enable = true;
 
   programs.thunar.plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-          thunar-volman
+    thunar-archive-plugin
+    thunar-volman
   ];
 
   services.gvfs.enable = true; # Mount, trash, and other functionalities
 
-      services.tumbler.enable = true; # Thumbnail support for images
+  services.tumbler.enable = true; # Thumbnail support for images
 
+  security.polkit.enable = true;
 
-security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
-
-services.gnome.gnome-keyring.enable = true;
-
-xdg.portal.extraPortals = [
+  xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-wlr
     pkgs.xdg-desktop-portal-gtk
-];
-#
-#systemd = {
-#    user.services.polkit-gnome-authentication-agent-1 = {
-#        description = "polkit-gnome-authentication-agent-1";
-#        wantedby = [ "graphical-session.target" ];
-#        wants = [ "graphical-session.target" ];
-#        after = [ "graphical-session.target" ];
-#        serviceconfig = {
-#            type = "simple";
-#            execstart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-#            restart = "on-failure";
-#            restartsec = 1;
-#            timeoutstopsec = 10;
-#        };
-#    };
-#};
+  ];
+  #
+  #systemd = {
+  #    user.services.polkit-gnome-authentication-agent-1 = {
+  #        description = "polkit-gnome-authentication-agent-1";
+  #        wantedby = [ "graphical-session.target" ];
+  #        wants = [ "graphical-session.target" ];
+  #        after = [ "graphical-session.target" ];
+  #        serviceconfig = {
+  #            type = "simple";
+  #            execstart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #            restart = "on-failure";
+  #            restartsec = 1;
+  #            timeoutstopsec = 10;
+  #        };
+  #    };
+  #};
 
-systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
+    };
   };
-};
 
   #services.gnome3.gnome-keyring.enable = true;
   #security.pam.services.lightdm.enableGnomeKeyring = true;
   #ssh.startAgent = true;
   programs.seahorse.enable = true;
 
-#legacyPackages.x86_64-linux.polkit_gnome
+  #legacyPackages.x86_64-linux.polkit_gnome
 
   services.tailscale.enable = true;
 
   services.atd.enable = true;
 
-
   services.locate.enable = true;
   services.locate.locate = pkgs.mlocate;
 
-
   security.pam.services.swaylock = {
-      text = ''
-          auth include login
-          '';
+    text = ''
+      auth include login
+    '';
   };
-
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -370,22 +353,22 @@ systemd = {
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  services.openssh= {
-      enable = true;
-      settings = {
-          PasswordAuthentication = true;
-      };
-# I'll disable this once I can connect.
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+    };
+    # I'll disable this once I can connect.
   };
 
-#networking
-networking.nameservers = [
+  #networking
+  networking.nameservers = [
     "8.8.8.8"
     "1.1.1.1"
-];
+  ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8080 8096 ];
+  networking.firewall.allowedTCPPorts = [8080 8096];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
@@ -397,5 +380,4 @@ networking.nameservers = [
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
