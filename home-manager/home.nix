@@ -21,6 +21,8 @@ in {
     # ./nvim.nix
   ];
 
+
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -40,6 +42,7 @@ in {
       #   });
       # })
     ];
+
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -291,6 +294,7 @@ in {
 
       jdk
       java-language-server
+      clangd
 
       typstfmt
       typst-lsp
