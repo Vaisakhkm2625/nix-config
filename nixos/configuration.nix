@@ -332,7 +332,7 @@
   services.atd.enable = true;
 
   services.locate.enable = true;
-  services.locate.locate = pkgs.mlocate;
+  services.locate.package = pkgs.mlocate;
 
   security.pam.services.swaylock = {
     text = ''
