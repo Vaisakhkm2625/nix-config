@@ -294,7 +294,7 @@ in {
 
       jdk
       java-language-server
-      clangd
+      #clangd
 
       typstfmt
       typst-lsp

@@ -66,7 +66,10 @@
     homeConfigurations = {
       # FIXME replace with your username@hostname (done)
       "vaisakh@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        # pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        # making unfree packages allowed - https://www.reddit.com/r/NixOS/comments/17p39u6/how_to_allow_unfree_packages_from_stable_and/
+        pkgs = import nixpkgs { system = "x86_64-linux"; config = { allowUnfree = true;  }; };
+
         extraSpecialArgs = {
           inherit inputs;
         }; # Pass flake inputs to our config
