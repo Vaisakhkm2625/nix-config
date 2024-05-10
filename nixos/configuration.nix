@@ -174,6 +174,12 @@
   services.xserver.displayManager.startx.enable = true;
   services.xserver.libinput.enable = true;
 
+  fonts.packages= with pkgs; [
+      roboto
+  ];
+
+
+
   #  services.greetd = {
   #      enable = true;
   #      settings = {
@@ -256,6 +262,10 @@
     polkit_gnome
     libsForQt5.qt5.qtgraphicaleffects
 
+
+    hyprcursor
+
+
     #mlocate
     wpgtk
   ];
@@ -264,6 +274,9 @@
 
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+
+
 
   programs.kdeconnect.enable = true;
   programs.zsh.enable = true;
@@ -354,7 +367,7 @@
   # services.openssh.enable = true;
 
   services.openssh = {
-    enable = true;
+    enable = false;
     settings = {
       PasswordAuthentication = true;
     };

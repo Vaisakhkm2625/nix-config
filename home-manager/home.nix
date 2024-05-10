@@ -16,6 +16,7 @@ in {
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
     inputs.xremap-flake.homeManagerModules.default
+        # inputs.catppuccin.homeManagerModules.catppuccin
     #            inputs.yazi-flake
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -90,6 +91,7 @@ in {
     fd
     mpv
     xdotool
+    wlrctl
     xclip
     lazygit
     jq
@@ -104,10 +106,12 @@ in {
     nix-search-cli
     pet
     eclipses.eclipse-java
-
     man-pages # c development man pages
+    exiftool
 
     swayidle
+
+    unstablePkgs.hyprcursor
 
     qrencode
     timg
@@ -218,10 +222,10 @@ in {
 
   #---themeing
 
-  # gtk.enable = true;
+  gtk.enable = true;
 
-  # gtk.cursorTheme.package = pkgs.bibata-cursors;
-  # gtk.cursorTheme.name = "Bibata-Modern-Ice";
+  gtk.cursorTheme.package = pkgs.bibata-cursors;
+  gtk.cursorTheme.name = "Bibata-Modern-Ice";
 
   # gtk.theme.package = pkgs.adw-gtk3;
   # gtk.theme.name = "adw-gtk3";
@@ -287,6 +291,7 @@ in {
       clang-tools_9
       lua51Packages.luarocks
       lua51Packages.magick
+      tectonic
 
       cmake-language-server
       gopls
