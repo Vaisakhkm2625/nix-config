@@ -197,6 +197,12 @@
     xkbVariant = "";
   };
 
+
+services.mysql = {
+  enable = true;
+  package = pkgs.mariadb;
+};
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
