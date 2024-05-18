@@ -211,6 +211,9 @@ services.mysql = {
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+# open tablet driver
+# hardware.opentabletdriver.enable = true;
+
   #xremap
   hardware.uinput.enable = true;
   users.groups.uinput.members = ["vaisakh"];
@@ -269,7 +272,7 @@ services.mysql = {
     libsForQt5.qt5.qtgraphicaleffects
 
 
-    hyprcursor
+    #hyprcursor
 
 
     #mlocate

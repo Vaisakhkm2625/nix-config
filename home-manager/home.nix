@@ -138,6 +138,7 @@ in {
     gimp
     zathura
     thunderbird
+    vscode
     shotwell
     qbittorrent
     losslesscut-bin
