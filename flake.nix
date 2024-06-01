@@ -15,6 +15,10 @@
     xremap-flake.url = "github:xremap/nix-flake";
     pyprland-flake.url = "github:hyprland-community/pyprland";
 
+
+    #stylix.url = "github:danth/stylix";
+
+
     #catppuccin.url = "github:catppuccin/nix";
     #yazi-flake.url = "github:sxyazi/yazi/";
 
@@ -57,6 +61,7 @@
               ];
             }
           )
+              #inputs.stylix.nixosModules.stylix
           ./nixos/configuration.nix
         ];
       };
@@ -75,7 +80,9 @@
           inherit inputs;
         }; # Pass flake inputs to our config
         # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        modules = [
+              #inputs.stylix.nixosModules.stylix
+        ./home-manager/home.nix];
       };
     };
   };

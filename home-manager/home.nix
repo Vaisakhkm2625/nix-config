@@ -16,6 +16,7 @@ in {
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
     inputs.xremap-flake.homeManagerModules.default
+    #inputs.stylix.homeManagerModules.stylix
         # inputs.catppuccin.homeManagerModules.catppuccin
     #            inputs.yazi-flake
     # You can also split up your configuration and import pieces of it here:
@@ -102,6 +103,8 @@ in {
     #jrnl # journl software(for my diaries)
     wtype
     rofimoji #emoji seletor
+    rofi-bluetooth
+
     pavucontrol
     nix-search-cli
     pet
@@ -138,7 +141,7 @@ in {
     gimp
     zathura
     thunderbird
-    vscode
+    #vscode
     shotwell
     qbittorrent
     losslesscut-bin
@@ -311,6 +314,33 @@ in {
       ripgrep
     ];
   };
+
+programs.vscode = {
+    enable = true;
+    userSettings = {
+      "window.titlebarstyle" = "custom";
+    };
+  };
+
+
+# stylix.image = pkgs.fetchurl {
+#     url = "https://www.pixelstalk.net/wp-content/uploads/2016/05/Epic-Anime-Awesome-Wallpapers.jpg";
+#     sha256 = "enQo3wqhgf0FEPHj2coOCvo7DuZv+x5rL/WIo4qPI50=";
+#   };
+#   stylix.polarity = "dark";
+  #stylix.targets.playmouth.enable =false;
+#
+
+
+# home.file = {
+#     ".config/Code/User/settings.json".text = ''
+#     {
+#         "window.titleBarStyle": "custom"
+#             // Add other settings here if needed
+#     }
+#     '';
+# };
+
 
   #programs.waybar = {
   #    enable = true;
