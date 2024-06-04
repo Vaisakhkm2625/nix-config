@@ -115,6 +115,7 @@ in {
     swayidle
 
     unstablePkgs.hyprcursor
+    unstablePkgs.wl-kbptr
 
     qrencode
     timg
@@ -376,5 +377,5 @@ programs.vscode = {
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 }
