@@ -357,7 +357,7 @@ services.mysql = {
 
   #legacyPackages.x86_64-linux.polkit_gnome
 
-  services.tailscale.enable = true;
+  services.tailscale.enable = false;
 
   services.atd.enable = true;
 
