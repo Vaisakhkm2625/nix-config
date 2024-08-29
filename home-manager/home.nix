@@ -61,6 +61,10 @@ in {
 
   fonts.fontconfig.enable = true;
 
+
+
+
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
 
@@ -128,8 +132,12 @@ in {
 
     poppler_utils
 
+    pyprland
+
     appimage-run
     steam-run
+
+    inxi
 
     #gui apps
     #teams
@@ -293,7 +301,7 @@ in {
       #nodejs
       python311Packages.pip
       gcc
-      clang-tools_9
+      clang-tools_16
       lua51Packages.luarocks
       lua51Packages.magick
       tectonic
@@ -313,6 +321,12 @@ in {
       nodejs_18
       yarn
       ripgrep
+
+      rustc
+      cargo
+    rust-analyzer
+
+
     ];
   };
 
@@ -376,6 +390,9 @@ programs.vscode = {
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+  home.stateVersion = "23.11";
+  home.enableNixpkgsReleaseCheck = false;
+  #home.stateVersion = "24.05";
 }

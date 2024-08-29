@@ -13,7 +13,7 @@
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
     xremap-flake.url = "github:xremap/nix-flake";
-    pyprland-flake.url = "github:hyprland-community/pyprland";
+    #pyprland-flake.url = "github:hyprland-community/pyprland";
 
 
     #stylix.url = "github:danth/stylix";
@@ -55,8 +55,8 @@
             in {
               nixpkgs.overlays = [overlay-unstable];
               environment.systemPackages = with pkgs; [
-                unstable.libsForQt5.sddm
-                unstable.pyprland
+                #unstable.libsForQt5.sddm
+                #unstable.pyprland
                 unstable.waybar
               ];
             }

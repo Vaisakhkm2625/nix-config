@@ -166,8 +166,14 @@
   services.xserver.enable = true;
 
   ## Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
+
+services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-sddm-corners";
+};
+
 
   services.xserver.windowManager.qtile.enable = true;
   services.xserver.windowManager.i3.enable = true;
@@ -199,7 +205,7 @@
 
 
 services.mysql = {
-  enable = true;
+  enable = false;
   package = pkgs.mariadb;
 };
 
@@ -220,9 +226,22 @@ services.mysql = {
   users.groups.input.members = ["vaisakh"];
 
   #bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  hardware.bluetooth = {
+      enable = true; # enables support for Bluetooth
+          settings = {
+              #General = {
+              #    Experimental = "true";
+              #};
+              Policy = {
+                  AutoEnable = "true";
+              };
+          };
+  };
+
+
+
 
   services.pipewire = {
     enable = true;
@@ -259,6 +278,8 @@ services.mysql = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+      catppuccin-sddm-corners
+
     vim
     wget
     git
@@ -398,7 +419,7 @@ services.mysql = {
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [8080 8096];
+  networking.firewall.allowedTCPPorts = [8080 8096 8554];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
