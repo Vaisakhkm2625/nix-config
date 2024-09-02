@@ -168,6 +168,11 @@
   ## Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
+services.desktopManager.plasma6.enable = true;
+
+
+
+
 
 services.displayManager.sddm = {
     enable = true;
@@ -375,6 +380,7 @@ services.mysql = {
   #security.pam.services.lightdm.enableGnomeKeyring = true;
   #ssh.startAgent = true;
   programs.seahorse.enable = true;
+programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
 
   #legacyPackages.x86_64-linux.polkit_gnome
 

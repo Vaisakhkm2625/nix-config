@@ -217,6 +217,14 @@ in {
 
     #   unstablePkgs.neovim
 
+      rustc
+      cargo
+    rust-analyzer
+
+
+
+
+
     #temp
     #logisim-evolution
     #paperless-ngx
