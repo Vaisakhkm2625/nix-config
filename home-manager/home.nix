@@ -195,7 +195,7 @@ in {
     # typst-live
     cmake-language-server
     python311Packages.python-lsp-ruff
-    python311Packages.python-lsp-server
+    #python311Packages.python-lsp-server
     python311Packages.pylsp-rope
     lua-language-server
     # ruff-lsp
