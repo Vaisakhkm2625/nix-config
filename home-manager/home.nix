@@ -72,12 +72,12 @@ in {
     # cli terminal apps
     tmux
     fzf
-    tuxmux
+    #tuxmux
     ncdu
     btop
     zip
     unzip
-    ranger
+    #ranger
     yazi
     ripdrag
     zoxide
@@ -96,7 +96,7 @@ in {
     fd
     mpv
     xdotool
-    wlrctl
+    #wlrctl
     xclip
     lazygit
     jq
@@ -112,7 +112,7 @@ in {
 
     pavucontrol
     nix-search-cli
-    pet
+    #pet
     eclipses.eclipse-java
     man-pages # c development man pages
     exiftool
@@ -120,18 +120,16 @@ in {
     swayidle
 
     unstablePkgs.hyprcursor
-    unstablePkgs.wl-kbptr
+    #unstablePkgs.wl-kbptr
 
     qrencode
     timg
 
-    drawio
+    #drawio
 
     sway-audio-idle-inhibit
 
     swaynotificationcenter
-
-    poppler_utils
 
     pyprland
 
@@ -150,7 +148,7 @@ in {
     obs-studio
     gimp
     zathura
-    thunderbird
+    #thunderbird
     #vscode
     shotwell
     qbittorrent
@@ -158,12 +156,12 @@ in {
     vlc
     imv
     blender
-    qtcreator
+    #qtcreator
 
-    jellyfin
+    #jellyfin
     mpvpaper
     yt-dlp
-    cava
+    #cava
     (pkgs.nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
 
     #hyperland config
@@ -173,7 +171,7 @@ in {
     slurp
 
     libnotify
-    dunst
+    #dunst
     swww
     brightnessctl
     wlogout
@@ -205,7 +203,7 @@ in {
 
     #java-language-server
 
-    poetry
+    #poetry
     # nodePackages_latest.vscode-langservers-extracted
     # nodePackages_latest.typescript-language-server
     # nodePackages_latest."@tailwindcss/language-server"
@@ -218,9 +216,10 @@ in {
 
     #   unstablePkgs.neovim
 
-      rustc
-      cargo
-    rust-analyzer
+# uncomment this for rust dev
+#     rustc
+#     cargo
+#   rust-analyzer
 
 
 
@@ -228,8 +227,11 @@ in {
     #temp
     #logisim-evolution
     #paperless-ngx
-    waypipe
-    xpra
+
+#remote screenshare
+
+#    waypipe
+#    xpra
   ];
 
   #    dconf = {

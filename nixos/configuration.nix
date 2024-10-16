@@ -182,7 +182,7 @@ services.displayManager.sddm = {
 };
 
 
-  services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.qtile.enable = false;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.displayManager.startx.enable = true;
   services.xserver.libinput.enable = true;
@@ -298,9 +298,6 @@ services.mysql = {
     libsForQt5.kdeconnect-kde
     polkit_gnome
     libsForQt5.qt5.qtgraphicaleffects
-
-    vscode
-
 
     #hyprcursor
 
