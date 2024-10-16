@@ -109,6 +109,7 @@ in {
     rofimoji #emoji seletor
     rofi-bluetooth
 
+
     pavucontrol
     nix-search-cli
     pet
@@ -224,7 +225,6 @@ in {
 
 
 
-
     #temp
     #logisim-evolution
     #paperless-ngx
@@ -322,6 +322,8 @@ in {
       java-language-server
       #clangd
 
+      eclipses.eclipse-jee
+
       typstfmt
       typst-lsp
 
@@ -384,6 +386,14 @@ programs.vscode = {
       CapsLock-i: Up
     '';
   };
+
+
+  services.kdeconnect = {
+      enable = true;
+      #package = pkgs.kdePackages.kdeconnect-kde;
+      indicator = true;
+  };
+
 
   programs = {
     direnv = {

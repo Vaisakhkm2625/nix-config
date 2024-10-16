@@ -170,7 +170,7 @@
   ## Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
-services.desktopManager.plasma6.enable = true;
+#services.desktopManager.plasma6.enable = true;
 
 
 
@@ -386,7 +386,10 @@ programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/
 
   #legacyPackages.x86_64-linux.polkit_gnome
 
-  services.tailscale.enable = false;
+  services.tailscale.enable = true;
+  systemd.services.tailscaled.after = ["NetworkManager-wait-online.service"];
+
+
 
   services.atd.enable = true;
 
@@ -413,7 +416,7 @@ programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/
   # services.openssh.enable = true;
 
   services.openssh = {
-    enable = false;
+    enable = true;
     settings = {
       PasswordAuthentication = true;
     };
