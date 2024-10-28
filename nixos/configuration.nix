@@ -170,15 +170,11 @@
   ## Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
-#services.desktopManager.plasma6.enable = true;
-
-
-
-
-
+services.desktopManager.plasma6.enable = true;
 services.displayManager.sddm = {
     enable = true;
-    theme = "catppuccin-sddm-corners";
+    theme = lib.mkForce "catppuccin-sddm-corners";
+    wayland.enable = true;
 };
 
 
@@ -222,7 +218,7 @@ services.mysql = {
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
+    security.rtkit.enable = true;
 
 # open tablet driver
 # hardware.opentabletdriver.enable = true;
