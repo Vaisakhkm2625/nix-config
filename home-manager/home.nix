@@ -322,6 +322,7 @@ in {
 
       jdk
       java-language-server
+      jdt-language-server
       #clangd
 
       eclipses.eclipse-jee

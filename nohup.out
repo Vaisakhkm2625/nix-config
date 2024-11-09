@@ -962,3 +962,11 @@
 [2024-09-22 22:16:06.808] [error] Hyprland IPC: Couldn't read (5)
 [2024-09-22 22:16:06.816] [error] hyprland/workspaces: Hyprland IPC: Couldn't connect to /run/user/1000/hypr/918d8340afd652b011b937d29d5eea0be08467f5_1727003945_153233324/.socket.sock. (3)
 Gdk-Message: 22:16:06.816: Lost connection to Wayland compositor.
+[2024-10-29 01:11:34.291] [info] Using configuration file /home/vaisakh/.config/waybar/config
+[2024-10-29 01:11:34.291] [info] Including resource file: ~/.config/waybar/modules.json
+[2024-10-29 01:11:34.295] [info] Discovered appearance 'dark'
+[2024-10-29 01:11:34.295] [info] Using CSS file /home/vaisakh/.config/waybar/style.css
+[2024-10-29 01:11:34.301] [info] Hyprland IPC starting
+[2024-10-29 01:11:34.303] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-29 01:11:34.856] [warning] Requested height: 5 is less than the minimum height: 33 required by the modules
+[2024-10-29 01:11:34.856] [info] Bar configured (width: 1280, height: 33) for output: eDP-1

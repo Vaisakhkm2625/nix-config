@@ -181,7 +181,7 @@ services.displayManager.sddm = {
   services.xserver.windowManager.qtile.enable = false;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.displayManager.startx.enable = true;
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   fonts.packages= with pkgs; [
       roboto
@@ -202,8 +202,8 @@ services.displayManager.sddm = {
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
 
@@ -388,6 +388,7 @@ programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/
 
   services.locate.enable = true;
   services.locate.package = pkgs.mlocate;
+  services.locate.localuser = null;
 
   security.pam.services.swaylock = {
     text = ''
@@ -423,7 +424,9 @@ programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [8080 8096 8554];
+#59100
+  networking.firewall.allowedTCPPorts = [8080 8096 8554 59100];
+
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
