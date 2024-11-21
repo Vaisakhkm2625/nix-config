@@ -109,11 +109,9 @@
   networking.networkmanager.enable = true;
 
   #virtualbox
-  #virtualisation.virtualbox.host.enable = true;
-  #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
-   virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 
 
   #virtualisation.virtualbox.guest.enable = true;
@@ -338,7 +336,7 @@ services.mysql = {
     pkgs.xdg-desktop-portal-wlr
     pkgs.xdg-desktop-portal-gtk
   ];
-  #
+
   #systemd = {
   #    user.services.polkit-gnome-authentication-agent-1 = {
   #        description = "polkit-gnome-authentication-agent-1";

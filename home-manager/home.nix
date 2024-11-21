@@ -21,6 +21,7 @@ in {
     #            inputs.yazi-flake
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./screen_copy.nix
   ];
 
 
@@ -74,7 +75,7 @@ in {
     fzf
     #tuxmux
     ncdu
-    btop
+    #btop
     zip
     unzip
     #ranger
@@ -95,9 +96,9 @@ in {
     #mlocate
     fd
     mpv
-    xdotool
+    #xdotool
     #wlrctl
-    xclip
+    #xclip
     lazygit
     jq
     bc
@@ -105,9 +106,12 @@ in {
     pipx
     grim
     #jrnl # journl software(for my diaries)
-    wtype
+    #wtype
     rofimoji #emoji seletor
     rofi-bluetooth
+
+    imagemagick
+    satty 
 
 
     pavucontrol
@@ -136,13 +140,13 @@ in {
     appimage-run
     steam-run
 
-    inxi
+    #inxi
 
     #gui apps
     #teams
     libreoffice
     gh
-    kitty
+    #kitty
     easyeffects
     brave
     obs-studio
@@ -177,6 +181,13 @@ in {
     wlogout
     protonvpn-gui
     pywal
+
+
+
+#xorg things.. remove
+scrot
+xclip
+#xorg things.. remove
 
     inputs.xremap-flake.packages.${system}.default
     #inputs.yazi-flake.packages.${system}.default
@@ -267,6 +278,13 @@ in {
   #    [General]
   #    theme=MateriaDark
   #        '';
+
+# TODO: define mime types
+  #xdg.mimeApps = {
+  #  associations.added = {
+  #      "application/pdf" = 
+  #  };
+  #};
 
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";

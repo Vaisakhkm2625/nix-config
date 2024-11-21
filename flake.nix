@@ -82,7 +82,8 @@
         # > Our main home-manager configuration file <
         modules = [
               #inputs.stylix.nixosModules.stylix
-        ./home-manager/home.nix];
+            ./home-manager/home.nix
+        ];
       };
     };
   };
