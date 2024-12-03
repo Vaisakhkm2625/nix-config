@@ -22,6 +22,8 @@ in {
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./screen_copy.nix
+    ./theme.nix
+    #./darktheme.nix
   ];
 
 
@@ -155,7 +157,7 @@ in {
     #thunderbird
     #vscode
     shotwell
-    qbittorrent
+    #qbittorrent
     losslesscut-bin
     vlc
     imv
@@ -195,8 +197,9 @@ xclip
     #theme
     #        dconf
     materia-kde-theme
+    rose-pine-gtk-theme
     #libsForQt5.qtstyleplugin-kvantum
-    #wpgtk # don't know needed... setting gtk from pywal
+    wpgtk # don't know needed... setting gtk from pywal
 
     ############ development ##################
     # LSPs
@@ -400,7 +403,7 @@ programs.vscode = {
   #xremap
 
   services.xremap = {
-    withHypr = true;
+    #withHypr = true;
     yamlConfig = ''
       keymap:
       - remap:

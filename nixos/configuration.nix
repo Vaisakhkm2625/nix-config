@@ -206,7 +206,7 @@ services.displayManager.sddm = {
 
 
 services.mysql = {
-  enable = false;
+  enable = true;
   package = pkgs.mariadb;
 };
 
@@ -319,6 +319,7 @@ services.mysql = {
 
   programs.dconf.enable = true;
 
+
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman
@@ -332,10 +333,17 @@ services.mysql = {
 
   services.gnome.gnome-keyring.enable = true;
 
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-wlr
-    pkgs.xdg-desktop-portal-gtk
-  ];
+  #xdg.portal.extraPortals = [
+  #  pkgs.xdg-desktop-portal-wlr
+  #  pkgs.xdg-desktop-portal-gtk
+  #];
+
+    xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+    configPackages = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+    };
+
 
   #systemd = {
   #    user.services.polkit-gnome-authentication-agent-1 = {

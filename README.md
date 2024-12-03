@@ -53,5 +53,12 @@ sudo chmod g+rwx /dev/uinput
 how to get unstable packages in a shell
 ```
 nix-shell -I nixpkgs=channel:nixpkgs-unstable -p cosmic-term
-
 ```
+
+ERRORS:
+
+if kernal error comes 
+```
+sudo nix-collect-garbage --delete-older-than 15d
+```
+
