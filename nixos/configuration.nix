@@ -300,7 +300,7 @@ services.mysql = {
     wpgtk
   ];
 
-  environment.noXlibs = false;
+  #environment.noXlibs = false;
 
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
