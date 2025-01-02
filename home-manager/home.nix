@@ -124,6 +124,7 @@ in {
     exiftool
 
     swayidle
+    nwg-dock-hyprland 
 
     unstablePkgs.hyprcursor
     #unstablePkgs.wl-kbptr

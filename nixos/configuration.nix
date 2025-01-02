@@ -181,6 +181,9 @@ services.displayManager.sddm = {
   services.xserver.displayManager.startx.enable = true;
   services.libinput.enable = true;
 
+
+services.ollama.enable = true;
+
   fonts.packages= with pkgs; [
       roboto
   ];
@@ -203,6 +206,8 @@ services.displayManager.sddm = {
     xkb.layout = "us";
     xkb.variant = "";
   };
+
+
 
 
 services.mysql = {
@@ -298,6 +303,12 @@ services.mysql = {
 
     #mlocate
     wpgtk
+
+
+# i really want hyprchroma
+cmake meson cpio
+
+
   ];
 
   #environment.noXlibs = false;
