@@ -169,6 +169,7 @@
   #services.xserver.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
 services.desktopManager.plasma6.enable = true;
+
 services.displayManager.sddm = {
     enable = true;
     theme = lib.mkForce "catppuccin-sddm-corners";
@@ -343,6 +344,10 @@ cmake meson cpio
   security.polkit.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
+
+
+    services.logind.lidSwitch = "ignore";
+
 
   #xdg.portal.extraPortals = [
   #  pkgs.xdg-desktop-portal-wlr
