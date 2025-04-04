@@ -337,6 +337,20 @@ cmake meson cpio
     thunar-volman
   ];
 
+# fk nix and python
+programs.nix-ld.enable = true;
+programs.nix-ld.libraries = with pkgs; [
+  stdenv.cc.cc.lib
+  zlib # numpy
+];
+# Now just add 
+# export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH
+# to shell hook to get access to numpy
+
+
+
+
+
   services.gvfs.enable = true; # Mount, trash, and other functionalities
 
   services.tumbler.enable = true; # Thumbnail support for images
