@@ -183,7 +183,7 @@ services.displayManager.sddm = {
   services.libinput.enable = true;
 
 
-services.ollama.enable = true;
+#services.ollama.enable = true;
 
   fonts.packages= with pkgs; [
       roboto
