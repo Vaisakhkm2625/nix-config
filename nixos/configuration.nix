@@ -18,6 +18,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./laptop.nix
+    ./virtualbox-pinned.nix
   ];
 
   nixpkgs = {
@@ -109,9 +110,9 @@
   networking.networkmanager.enable = true;
 
   #virtualbox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  #virtualisation.virtualbox.host.enable = true;
+  #users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
 
 
   #virtualisation.virtualbox.guest.enable = true;
