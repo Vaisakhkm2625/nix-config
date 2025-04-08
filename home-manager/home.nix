@@ -65,9 +65,6 @@ in {
   fonts.fontconfig.enable = true;
 
 
-
-
-
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
 
@@ -260,28 +257,28 @@ xclip
 
   #---themeing
 
-  gtk.enable = true;
+ gtk.enable = true;
 
-  gtk.cursorTheme.package = pkgs.bibata-cursors;
-  gtk.cursorTheme.name = "Bibata-Modern-Ice";
+ gtk.cursorTheme.package = pkgs.bibata-cursors;
+ gtk.cursorTheme.name = "Bibata-Modern-Ice";
 
-  # gtk.theme.package = pkgs.adw-gtk3;
-  # gtk.theme.name = "adw-gtk3";
+ # gtk.theme.package = pkgs.adw-gtk3;
+ # gtk.theme.name = "adw-gtk3";
 
-  # qt.enable = true;
-  # qt.platformTheme= "gtk";
-  # qt.style.name= "adwaita-dark";
+ # qt.enable = true;
+ # qt.platformTheme= "gtk";
+ # qt.style.name= "adwaita-dark";
 
-  gtk.iconTheme.package = pkgs.papirus-icon-theme;
-  gtk.iconTheme.name = "Papirus-Dark";
+ gtk.iconTheme.package = pkgs.papirus-icon-theme;
+ gtk.iconTheme.name = "Papirus-Dark";
 
-  #gtk.theme.package = pkgs.materia-theme;
-  #gtk.theme.name = "Materia-dark-compact";
+ #gtk.theme.package = pkgs.materia-theme;
+ #gtk.theme.name = "Materia-dark-compact";
 
-  #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-  #    [General]
-  #    theme=MateriaDark
-  #        '';
+ #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+ #    [General]
+ #    theme=MateriaDark
+ #        '';
 
 # TODO: define mime types
   #xdg.mimeApps = {
@@ -318,12 +315,14 @@ xclip
     enable = true;
     settings.show_cpu_temperature = 1;
   };
+
   programs.neovim = {
     enable = true;
     # TODO: 2023-12-18
     #package = unstablePkgs.neovim;
     #extraConfig = ":luafile ~/.config/nvim/init.lua";
     extraLuaPackages = ps: [ps.magick];
+
     plugins = [
       pkgs.vimPlugins.flutter-tools-nvim
     ];

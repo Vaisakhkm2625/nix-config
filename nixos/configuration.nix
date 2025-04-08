@@ -19,6 +19,7 @@
     ./hardware-configuration.nix
     ./laptop.nix
     ./virtualbox-pinned.nix
+    ./sddm-theme-enable.nix
   ];
 
   nixpkgs = {
@@ -171,11 +172,15 @@
   #services.xserver.desktopManager.plasma5.enable = true;
 services.desktopManager.plasma6.enable = true;
 
-services.displayManager.sddm = {
-    enable = true;
-    theme = lib.mkForce "catppuccin-sddm-corners";
-    wayland.enable = true;
-};
+#services.displayManager.sddm = {
+#    enable = true;
+#    theme = lib.mkForce "catppuccin-sddm-corners";
+#    wayland.enable = true;
+#    package = lib.mkForce pkgs.kdePackages.sddm;
+#    extraPackages = [
+#        pkgs.catppuccin-sddm-corners
+#    ];
+#};
 
 
   services.xserver.windowManager.qtile.enable = false;
@@ -286,7 +291,7 @@ services.mysql = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      catppuccin-sddm-corners
+    catppuccin-sddm-corners
 
     vim
     wget
