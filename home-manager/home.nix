@@ -23,6 +23,7 @@ in {
     # ./nvim.nix
     ./screen_copy.nix
     ./theme.nix
+    ./systemd/notify-hi.nix
     #./darktheme.nix
   ];
 
@@ -93,6 +94,8 @@ in {
     ydotool
     foot
     #mlocate
+
+
     fd
     mpv
     #xdotool
@@ -112,6 +115,8 @@ in {
     imagemagick
     satty 
 
+
+    hyprpaper
 
     pavucontrol
     nix-search-cli
@@ -166,7 +171,7 @@ in {
     mpvpaper
     yt-dlp
     #cava
-    (pkgs.nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
+    (pkgs.nerdfonts.override {fonts = ["Terminus" "FiraCode" "DroidSansMono"];})
 
     #hyperland config
     networkmanagerapplet
@@ -328,6 +333,11 @@ xclip
     ];
 
     extraPackages = with pkgs; [
+
+      #image preview for foot
+      libsixel
+
+
       # along with language-server, please add language packages also
       #nodejs
       python311Packages.pip
@@ -336,6 +346,7 @@ xclip
       lua51Packages.luarocks
       lua51Packages.magick
       tectonic
+
 
       cmake-language-server
       gopls
@@ -358,8 +369,8 @@ xclip
 
       rustc
       cargo
-    rust-analyzer
-
+      rust-analyzer
+      angular-language-server
 
     ];
   };

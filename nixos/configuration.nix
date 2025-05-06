@@ -57,6 +57,13 @@
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
     };
+
+    # gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 30d";
+    # };
+
   };
 
   # FIXME: Add the rest of your current configuration
@@ -228,7 +235,7 @@ services.mysql = {
   # Enable sound with pipewire.
   #sound.enable = true;
   hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
+  security.rtkit.enable = true;
 
 # open tablet driver
 # hardware.opentabletdriver.enable = true;
@@ -256,18 +263,22 @@ services.mysql = {
 
 
 
-  services.pipewire = {
+services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    audio.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+    alsa = {
+        enable = true;
+        support32Bit = true;
+    };
+# If you want to use JACK applications, uncomment this
+jack.enable = true;
+
+# use the example session manager (no others are packaged yet so this is enabled by default,
+# no need to redefine it in your config for now)
+#media-session.enable = true;
+};
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -279,11 +290,19 @@ services.mysql = {
     extraGroups = ["networkmanager" "wheel" "input"];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      firefox
       kate
       #  thunderbird
     ];
   };
+
+
+
+programs.firefox = {
+    enable = true;
+    nativeMessagingHosts.packages = [
+        pkgs.tridactyl-native
+    ];
+};
 
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
@@ -323,6 +342,9 @@ cmake meson cpio
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+
+  #programs.sway.enable = true;
+
 
   #stylix.image = ./wallpaper.png;
   #stylix.image = pkgs.fetchurl {
@@ -374,11 +396,28 @@ programs.nix-ld.libraries = with pkgs; [
   #  pkgs.xdg-desktop-portal-gtk
   #];
 
-    xdg.portal = {
+
+  programs.sway.enable = true;
+
+  xdg.portal = {
+      config = {  #sway
+          common = {
+              default = "wlr";
+          };
+      };
+      wlr.enable=true;
+      wlr.settings.screencast = {
+        output_name="eDP-1";
+        chooser_type="simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+        };
+  };
+
+xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
-    configPackages = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
-    };
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk  ];
+    configPackages = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk  ];
+};
 
 
   #systemd = {
@@ -417,7 +456,7 @@ programs.nix-ld.libraries = with pkgs; [
   #security.pam.services.lightdm.enableGnomeKeyring = true;
   #ssh.startAgent = true;
   programs.seahorse.enable = true;
-programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+  programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
 
   #legacyPackages.x86_64-linux.polkit_gnome
 
